@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compitable" content="ie=edge" />
+    <title>Speech to text</title>
+  </head>
+  <body>
+    <div>
+      <button id="speak">Type to Speak</button>
+      <p id="textarea"></p>
+    </div>
+  </body>
+
+  <script>
+    var speak = document.getElementById("speak");
+    var textarea = document.getElementById("textarea");
+    var SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    var recognition = new SpeechRecognition();
+    speak.addEventListener("click", function () {
+      recognition.start();
+      textarea.innerHTML = "...speaking";
+    });
+    recognition.onresult = function (e) {
+      console.log(e);
+      var transcript = e.results[0][0].transcript;
+      textarea.innerHTML = transcript;
+    };
+  </script>
+</html>
